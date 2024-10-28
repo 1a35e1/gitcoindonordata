@@ -79,7 +79,7 @@ const RootLayout = async ({ children }: Props) => {
               <a
                 rel="noreferrer"
                 target="_blank"
-                href="https://explorer.gitcoin.co/#/round/42161/385/52"
+                href="https://explorer.gitcoin.co/#/round/42161/636/3"
                 className='underline'
               >
                 GitCoin Grant here
