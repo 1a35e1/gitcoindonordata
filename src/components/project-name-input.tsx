@@ -46,11 +46,11 @@ export const ProjectNameInput = () => {
     if (search.length > 1) {
       const newItems = (data ?? [])
         .filter((project) => {
-          const inputMatch = search.toLowerCase();
+          const inputMatch = search.toLowerCase().replaceAll('-', ' ');
           const isMatchKey = project.key.includes(inputMatch);
-          const isMatchTitle = project.projects
-            .map((p) => p?.name)
-            .some((title) => title?.includes(inputMatch));
+          const isMatchTitle = project.projects.some((p) =>
+            p && p.name ? p.name.toLowerCase().includes(inputMatch) : false,
+          );
           return isMatchKey || isMatchTitle;
         })
         .map((project) => ({
