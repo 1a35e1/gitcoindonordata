@@ -91,6 +91,13 @@ export const CHAINS = [
     logo: 'https://icons.llamao.fi/icons/chains/rsz_base.jpg',
     explorer: 'https://basescan.org/tx/',
   },
+  {
+    id: '42220',
+    name: 'Celo',
+    url: 'https://celo.org/',
+    logo: 'https://cryptologos.cc/logos/celo-celo-logo.png',
+    explorer: 'https://explorer.celo.org/tx/',
+  },
 ];
 
 export const TOKENS = {
