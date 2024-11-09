@@ -23,30 +23,33 @@ export const ProjectRoundStats = ({ title }: Props) => {
     if (!data) return [];
 
     const result = data.flatMap((d) =>
-      d.applications!.map((application) => {
-        const { totalAmountDonatedInUsd, totalDonationsCount, chainId, round } = application;
-        const {
-          id,
-          roundMetadata: { name },
-          donationsStartTime,
-          donationsEndTime,
-        } = round!;
+      d
+        .applications!.filter((application) => !!application.round?.roundMetadata.name)
+        .map((application) => {
+          const { totalAmountDonatedInUsd, totalDonationsCount, chainId, round } = application;
+          const {
+            id,
+            roundMetadata: { name },
+            donationsStartTime,
+            donationsEndTime,
+          } = round!;
 
-        const chain = CHAINS.find((chain) => chain.id === `${chainId}`)!;
+          const chain = CHAINS.find((chain) => chain.id === `${chainId}`)!;
 
-        return {
-          id,
-          name,
-          chain,
-          totalAmount: totalAmountDonatedInUsd ?? 0,
-          contributors: totalDonationsCount ?? 0,
-          startTime: formatDate(donationsStartTime),
-          endTime: formatDate(donationsEndTime),
-        };
-      }),
+          return {
+            id,
+            name,
+            chain,
+            totalAmount: totalAmountDonatedInUsd ?? 0,
+            contributors: totalDonationsCount ?? 0,
+            startTime: formatDate(donationsStartTime),
+            endTime: formatDate(donationsEndTime),
+            ts: new Date(donationsStartTime).getTime(),
+          };
+        }),
     );
 
-    return result;
+    return result.sort((a, b) => b.ts - a.ts);
   }, [data]);
 
   const [viewedRoundId, setViewedRoundId] = useState('');
