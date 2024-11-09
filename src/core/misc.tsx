@@ -24,16 +24,21 @@ export const DONATIONS_COLUMNS: ColDef<DonationRow>[] = [
     field: 'transactionHash',
     valueFormatter: ({ data }) => formatAddress(data?.transactionHash),
     filter: true,
-    cellRenderer: (props: CustomCellRendererProps) => (
-      <LinkCellRenderer
-        getLink={(value: string) => {
-          const { data } = props;
-          const explorer = CHAINS.find((c) => c.id === `${data.chainId}`)?.explorer;
-          return `${explorer}${value}`;
-        }}
-        {...props}
-      />
-    ),
+    cellRenderer: (props: CustomCellRendererProps) => {
+      const { data } = props;
+      const explorer = CHAINS.find((c) => c.id === `${data.chainId}`)?.explorer;
+
+      if (!explorer) return props.value;
+
+      return (
+        <LinkCellRenderer
+          getLink={(value: string) => {
+            return `${explorer}${value}`;
+          }}
+          {...props}
+        />
+      );
+    },
   },
   {
     headerName: 'VOTER ADDRESS',
