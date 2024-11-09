@@ -24,9 +24,9 @@ export const useProject = (title: string) => {
     staleTime: STALETIME.DEFAULT,
     enabled: !!projectNames,
     select: (data) => {
-      const result = data
-        .projects!.sort((a, b) => b.metadata.createdAt - a.metadata.createdAt)
-        .filter((p) => p.metadata.type === 'project');
+      const result = data.projects!.sort((a, b) => b.metadata.createdAt - a.metadata.createdAt);
+      // Commented out -> causing other projects to not show up (must've been api update)
+      // .filter((p) => p.metadata.type === 'project');
 
       // // Sort by donations desc
       // const result = data.projects!.sort((a, b) => {
