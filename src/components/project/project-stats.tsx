@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { useProjectContext } from '@/app/projects/[chainId]/[projectId]/context';
 import { StatsSection } from '@/components/stats-section';
-import { fetchFoundInfo } from '@/utils/fetch-found-info';
+import { fetchRoundInfo } from '@/utils/fetch-round-info';
 
 
 interface RoundInfo {
@@ -20,7 +20,7 @@ export const ProjectStats = () => {
 
   useEffect(() => {
     if (!project) return;
-    const data = fetchFoundInfo(project);
+    const data = fetchRoundInfo(project);
     setRoundInfo({
       estimatedFunds: Number(data.estimatedFunds),
       contributors: data.contributors,
