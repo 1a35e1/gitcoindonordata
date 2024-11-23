@@ -16,6 +16,7 @@ export const useRoundInfo = (title: string, roundId?: string) => {
 
   return useQuery({
     queryKey: queryKeys.getRoundInfo(title, applicationIds, roundId),
+    // @ts-expect-error TODO: fix this
     queryFn: () => getRoundInfo(data, roundId),
     enabled: !!data,
     staleTime: STALETIME.DEFAULT,

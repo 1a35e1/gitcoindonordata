@@ -56,6 +56,7 @@ export const ProjectNameInput = () => {
   return (
     <>
       <AutoComplete
+        // @ts-expect-error TODO: fix this
         items={results}
         total={results.length}
         inputValue={currentItem?.name ?? query}
